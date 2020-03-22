@@ -7,11 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.lang.Math;
 
 public class cc_tadelive
 {
 
-    public static HashMap<Integer,Integer> sortmap(HashMap<Integer,Integer> hmap)
+    public static HashMap<Integer,Integer> sortrevmap(HashMap<Integer,Integer> hmap)
     {
         List<Map.Entry<Integer,Integer>> list=new LinkedList<Map.Entry<Integer,Integer>>(hmap.entrySet());
 
@@ -22,6 +23,8 @@ public class cc_tadelive
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
+
+        Collections.reverse(list);
 
         HashMap<Integer,Integer> temp=new LinkedHashMap<>();
         for(Map.Entry<Integer,Integer> e:list)
@@ -42,6 +45,8 @@ public class cc_tadelive
         
         HashMap<Integer,Integer> ma=new HashMap<>();
         HashMap<Integer,Integer> mb=new HashMap<>();
+        HashMap<Integer,Integer> diff=new HashMap<>();
+
 
         for(int i=0;i<n;i++)
         {
@@ -53,19 +58,46 @@ public class cc_tadelive
         {
             t=sc.nextInt();
             mb.put(i,t);
+            diff.put(i, Math.abs(ma.get(i)-t));
         }
 
-        ma=sortmap(ma);
-        mb=sortmap(mb);
+        diff=sortrevmap(diff);
 
-        for(Map.Entry<Integer,Integer> m:ma.entrySet())
-        System.out.println(m.getKey()+"->"+m.getValue());
+        //for(Map.Entry<Integer,Integer> m:diff.entrySet())
+        //System.out.println(m.getKey()+"->"+m.getValue());
 
-        for(Map.Entry<Integer,Integer> m:mb.entrySet())
-        System.out.println(m.getKey()+"->"+m.getValue());
-
-
-
+        long sum=0;
+        int a=0,b=0;
+        for(Map.Entry<Integer,Integer> m:diff.entrySet())
+        {
+            if(ma.get(m.getKey())>=mb.get(m.getKey()))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            {
+                if(a<x)
+                {
+                    sum+=ma.get(m.getKey());
+                    a++;
+                }
+                else
+                {
+                    sum+=mb.get(m.getKey());
+                    b++;
+                }
+            }
+            else
+            {
+                if(b<y)
+                {
+                    sum+=mb.get(m.getKey());
+                    b++;
+                }
+                else
+                {
+                    sum+=ma.get(m.getKey());
+                    a++;
+                }
+            }
+        }
+        System.out.println(sum);
         sc.close();
     }
 }
