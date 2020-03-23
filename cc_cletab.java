@@ -51,16 +51,12 @@ public class cc_cletab
                     {
                         int maxindex=-1,frmnum=-1;
                         Iterator<Integer> itr=frmbuf.iterator();
-                        boolean empty=false;
-                        while(itr.hasNext())
-                        {
-                            Vector<Integer> tempv=new Vector<>();
-                            int tempe=itr.next();
-                            tempv=map.get(tempe);
-                            if(tempv.isEmpty())
-                            {
-                                frmnum=tempe;
-                                empty=true;
+                        while (itr.hasNext()) {
+                            Vector<Integer> tempv = new Vector<>();
+                            int tempe = itr.next();
+                            tempv = map.get(tempe);
+                            if (tempv.isEmpty()) {
+                                frmnum = tempe;
                                 break;
                             }
                             else
