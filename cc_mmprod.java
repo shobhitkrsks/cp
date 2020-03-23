@@ -21,45 +21,48 @@ public class cc_mmprod
             }
             Arrays.sort(ar);
 
-            if(ar[n-1]==0 && k%2==1)
+            if(ar[n-1]==0 && (k%2==1))
             {
                 product=0;
             } 
             else if(ar[n-1]<=0 && k%2==1)
             {
                 for(int i=n-1;i>=n-k;i--)
-                    product=(product*ar[i])%(mod);
+                    product=((product%mod)*(ar[i]%mod))%(mod);
             }
             else
             {
                 int i=0,j=n-1,x=k;
-                if(k%2==1 && ar[n-1]>0)
+                if(k%2==1)
                 {
-                    product=(product*ar[n-1])%(mod);
+                    product=(product*ar[j])%(mod);
                     j--;
                     x--;
                 }
-                x=x>>1;
+                x=x/2;
 
                 for(int p=0;p<x;p++)
                 {
                     long lp=(ar[i]*ar[i+1]);
                     long rp=(ar[j]*ar[j-1]);
 
-                    if(lp>=rp)
+                    if(lp>rp)
                     {
-                        product=(product*lp)%(mod);
+                        product=((product%mod)*(lp%mod))%(mod);
                         i+=2;
                     }
                     else
                     {
-                        product=(product*rp)%(mod);
+                        product=((product%mod)*(rp%mod))%(mod);
                         j-=2;
                     }
                 }
             }
 
-            System.out.println(product%mod);
+            if(product<0)
+            System.out.println((product+mod)%mod);
+            else
+            System.out.println(product);
            
         }
         sc.close();
