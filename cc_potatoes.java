@@ -90,5 +90,6 @@ public class cc_potatoes
             int z=temp-x-y;
             System.out.println(z);
         }
+        sc.close();
     }
 }

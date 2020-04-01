@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Stack;
 
 public class tryj
 {
@@ -15,6 +14,7 @@ public class tryj
             System.out.println(p+" "+q);
             
         }
+        sc.close();
     }
 } 
 //01234

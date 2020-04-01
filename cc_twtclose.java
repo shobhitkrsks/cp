@@ -38,5 +38,6 @@ public class cc_twtclose
             }
             System.out.println(count);
         }
+        sc.close();
     }
 }
