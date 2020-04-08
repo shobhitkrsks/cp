@@ -9,10 +9,9 @@ public class tryj
         sc.nextLine();
 	    while(t--!=0)
 	    {
-            String p=sc.next();
-            String q=sc.next();
-            System.out.println(p+" "+q);
-            
+            int mod=1000000007;
+            int s=  1000000009;
+            System.out.println(s%mod);
         }
         sc.close();
     }
