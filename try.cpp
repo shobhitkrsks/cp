@@ -1,32 +1,90 @@
-#include<iostream>
-#include<bits/stdc++.h>
-#define ll long long
-int ar[200005];
+#include <iostream> 
 using namespace std;
+int N;
+int dp[10010][10010],grid[10010][10010];
 
-struct cmp
+void extractnums(string s, int* ar)
 {
-    bool operator()(pair<int,int> p1, pair<int,int> p2)
-    const {
-        if(p1.first!=p2.first)
-            return p1.first>=p2.first;
-        else
+    for(int i=0;i<N;i++)
+    {
+        ar[i]=s[i]-'0';
+    }
+}
+
+int getsum(int r1,int r2,int c1,int c2)
+{
+    return dp[r2][c2]-dp[r2][c1]-dp[r1][c2]+dp[r1][c1];    
+}
+
+int sumfound(int S)
+{
+    for(int i=0;i<10010;i++)
+    {
+        for(int j=0;j<10010;j++)
         {
-            return p1.second<=p2.second;
+            dp[i][j]=0;
         }
     }
-};
+    
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<N;j++)
+        {
+            dp[i+1][j+1]=dp[i+1][j]+dp[i][j+1]-dp[i][j]+grid[i][j];
+        }
+    }
+    
+    int count=0;
+    for(int K=1;K<=N;K++)
+    {
+        for(int i=0;i<N;i+=K)
+        {
+            for(int j=0;j<N;j+=K)
+            {
+                int sum = getsum(i,i+K,j,j+K);
+                
+                if(sum==S)
+                    count++;
+            }
+        }
+    }
 
-int main()
-{
-    set<pair<int,int>,cmp> m;
-	m.insert(make_pair(2,3));
-	m.insert(make_pair(2,2));
-
-	m.insert(make_pair(0,2));
-	m.insert(make_pair(0,1));
-
-    for(auto i:m)
-        cout<<i.first<<" "<<i.second<<endl;
-    return 0;
+    return count;
 }
+
+int main() { 
+    
+    int tc;
+    cin>>tc;
+    int tc1=0;
+    while(tc1++<tc)
+    {
+        int S;
+        cin>>N>>S;
+        
+        string t;
+        cin>>t;
+        int ar[N];
+        extractnums(t,&ar[0]);
+        
+        for(int i=0;i<10010;i++)
+        {
+            for(int j=0;j<10010;j++)
+            {
+                grid[i][j]=0;
+            }
+        }
+        
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                grid[i][j]=ar[i]+ar[j];
+            }
+        }
+        
+        cout<<"#"<<tc1<<" "<<sumfound(S)<<"\n";
+        
+    }
+    return 0; 
+} 
