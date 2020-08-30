@@ -11,7 +11,18 @@ int main()
     cin>>tc;
     while(tc--)
     {
-        
+        int n,k;
+        cin>>n>>k;
+
+        if(k!=0)
+            cout<<abs(k-n)<<"\n";
+        else if(k==0)
+        {
+            if(n>1)
+                cout<<"0\n";
+            else
+                cout<<abs(2-n)<<"\n";
+        }
     }
 
     return 0;

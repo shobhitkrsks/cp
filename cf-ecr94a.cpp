@@ -11,7 +11,20 @@ int main()
     cin>>tc;
     while(tc--)
     {
-        
+        int n;
+        cin>>n;
+
+        string s;
+        cin>>s;
+
+        string res="";
+
+        for(int i=0;i<n;i++)
+        {
+            res=res+s[2*i];
+        }
+
+        cout<<res<<"\n";
     }
 
     return 0;
