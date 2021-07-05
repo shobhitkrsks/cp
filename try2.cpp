@@ -1,25 +1,29 @@
-#include<iostream>
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define m 1000000007
 
-int expo(int x, int y) 
-{ 
-    long long temp; 
-    if( y == 0) 
-        return 1; 
-    temp = expo(x, y/2)%m; 
-    if (y%2 == 0) 
-        return (temp*temp)%m; 
-    else
-        return (x*temp*temp)%m; 
-} 
+struct comp
+{
+    bool operator()(pair<int, int> p1, pair<int, int> p2) const
+    {
+        if (p1.first < p2.first)
+            return true;
+        else if (p1.first == p2.first)
+            return p1.second > p2.second;
+        else
+            return false;
+    }
+};
 
 int main()
 {
-    double d=1.5;
-    double rem=d-(int)d;
-    rem-=0.5;
-    if(rem==0)
-        cout<<rem;
+    set<pair<int, int>, comp> s;
+    s.insert({3, 1});
+    s.insert({2, 2});
+    s.insert({1, 3});
+    s.insert({1, 4});
+
+    for (auto p : s)
+    {
+        cout << p.first << " " << p.second << "\n";
+    }
 }
